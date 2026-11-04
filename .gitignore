@@ -1,3 +1,9 @@
 .env*
 node_modules/
 
+
+# Private environment files and local credentials
+*.env*
+*.pem
+*.key
+.local/
