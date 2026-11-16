@@ -472,8 +472,10 @@ button { font: inherit; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  :root:not(.lenis) { scroll-behavior: smooth; }
+  :root { scroll-behavior: smooth; }
 }
+
+:root.is-scrolling .title-liquid { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {
   .button, .menu-bars::before, .menu-bars::after { transition: none; }
