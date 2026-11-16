@@ -277,7 +277,74 @@ button { font: inherit; }
 .section-tint { background: var(--tint); }
 .section-heading { max-width: 720px; margin-bottom: 30px; }
 .section h2 { font-size: clamp(2.2rem, 5.7vw, 6.3rem); font-weight: 740; line-height: .92; letter-spacing: -.061em; text-wrap: balance; }
-@supports (background-clip: text) {
+/* Olas dentro de los títulos. El texto queda quieto y recorta (-webkit-mask-clip: text) una franja
+   con el SVG que se mueve con transform: la anima el compositor y el texto no se repinta en cada cuadro.
+   Misma geometría que antes: una fila de olas por línea, alta como la caja de contenido de Geist (1.3em). */
+@supports (-webkit-mask-clip: text) {
+  .title-liquid {
+    position: relative;
+    display: block;
+    overflow-x: clip; /* la franja es más ancha que el título: sin esto habría scroll horizontal */
+    overflow-clip-margin: .1em; /* la última letra sobresale por el letter-spacing negativo */
+    -webkit-mask-image: linear-gradient(#000 0 0);
+    -webkit-mask-clip: text;
+  }
+
+  .title-liquid::before, .title-liquid::after {
+    --wave: url("./assets/title-water.svg?v=5c5d0a5ec0bb");
+    content: "";
+    position: absolute;
+    top: calc((1lh - 1.3em) / 2);
+    bottom: calc((1lh - 1.3em) / 2);
+    left: 0;
+    pointer-events: none;
+  }
+
+  .title-liquid::after {
+    width: calc(100% + 7.4em);
+    /* ponytail: una capa por línea hasta 6 líneas; una 7.ª línea queda sin olas */
+    background: var(--wave) 0 0 / 7.4em 1.3em repeat-x, var(--wave) 0 1lh / 7.4em 1.3em repeat-x,
+      var(--wave) 0 2lh / 7.4em 1.3em repeat-x, var(--wave) 0 3lh / 7.4em 1.3em repeat-x,
+      var(--wave) 0 4lh / 7.4em 1.3em repeat-x, var(--wave) 0 5lh / 7.4em 1.3em repeat-x;
+    transform: translateX(-7.4em);
+  }
+
+  .startup-name .title-liquid::before, .startup-name .title-liquid::after { bottom: auto; height: 1.3em; }
+  .startup-name .title-liquid::before { width: calc(100% + 5.5em); background: var(--wave) 0 75% / 5.5em 120% repeat-x; }
+  .startup-name .title-liquid::after {
+    width: calc(100% + 3.8em);
+    background: url("./assets/title-water-front.svg?v=b3fafd025f18") 0 55% / 3.8em 130% repeat-x;
+    transform: translateX(-3.8em);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .title-water-active .title-liquid::after { animation: title-wave-flow 18.5s linear infinite; }
+    .startup-name.title-water-active .title-liquid::after { animation: startup-front-flow 14s linear infinite; }
+    .startup-name.title-water-active .title-liquid::before { animation: startup-back-flow 14s linear infinite; }
+  }
+}
+
+@keyframes title-wave-flow {
+  to { transform: none; }
+}
+
+/* Equivalen a los background-position de startup-water-flow, pasados a em. */
+@keyframes startup-front-flow {
+  25% { transform: translate(-2.85em, -.066em); }
+  50% { transform: translate(-1.9em, -.027em); }
+  75% { transform: translate(-.95em, .043em); }
+  to { transform: none; }
+}
+
+@keyframes startup-back-flow {
+  25% { transform: translate(-1.375em, .044em); }
+  50% { transform: translate(-2.75em, -.008em); }
+  75% { transform: translate(-4.125em, -.029em); }
+  to { transform: translateX(-5.5em); }
+}
+
+/* Navegadores sin -webkit-mask-clip: text (Firefox): versión anterior, repinta en cada cuadro. */
+@supports (background-clip: text) and (not (-webkit-mask-clip: text)) {
   .title-liquid {
     background: currentColor url("./assets/title-water.svg?v=5c5d0a5ec0bb") repeat-x 0 0 / 7.4em 100%;
     background-clip: text;
