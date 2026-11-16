@@ -132,6 +132,8 @@ function setupRipples() {
 
   pointerMotion.addEventListener('change', stop);
   document.addEventListener('visibilitychange', stop);
+  window.addEventListener('wheel', stop, { passive: true });
+  window.addEventListener('scroll', stop, { passive: true });
 
   return ({ clientX: x, clientY: y }) => {
     const time = performance.now();
@@ -145,7 +147,7 @@ function setupRipples() {
 
 let ripple;
 document.addEventListener('pointermove', (event) => {
-  if (event.pointerType !== 'mouse' || !pointerMotion.matches) return;
+  if (event.pointerType !== 'mouse' || !pointerMotion.matches || document.documentElement.classList.contains('is-scrolling')) return;
   ripple ??= setupRipples();
   ripple(event);
 }, { passive: true });
