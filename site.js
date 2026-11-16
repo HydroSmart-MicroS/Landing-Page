@@ -34,7 +34,13 @@ function updateHeader() {
 
 document.documentElement.classList.add('js-enabled');
 updateHeader();
-window.addEventListener('scroll', updateHeader, { passive: true });
+let scrollIdle;
+window.addEventListener('scroll', () => {
+  updateHeader();
+  if (!root.classList.contains('is-scrolling')) root.classList.add('is-scrolling');
+  clearTimeout(scrollIdle);
+  scrollIdle = setTimeout(() => root.classList.remove('is-scrolling'), 160);
+}, { passive: true });
 toggle.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
 nav.addEventListener('click', (event) => {
   if (event.target.closest('a')) setMenu(false);
@@ -57,7 +63,6 @@ const titlesInView = new IntersectionObserver((entries) => {
 });
 document.querySelectorAll('[data-title-water]').forEach((title) => titlesInView.observe(title));
 
-let lenis;
 let animateNavigation;
 let departure;
 
@@ -67,16 +72,7 @@ document.addEventListener('click', (event) => {
   const link = event.target.closest('a[href]');
   if (!link || (link.target && link.target !== '_self') || link.hasAttribute('download')) return;
 
-  if (link.getAttribute('href').startsWith('#')) {
-    const target = document.getElementById(link.hash.slice(1));
-    if (!lenis || !target) return;
-
-    event.preventDefault();
-    if (location.hash !== link.hash) history.pushState(null, '', link.hash);
-    target.focus({ preventScroll: true });
-    lenis.scrollTo(target, { duration: 0.95, easing: (progress) => 1 - (1 - progress) ** 3 });
-    return;
-  }
+  if (link.getAttribute('href').startsWith('#')) return;
 
   if (!animateNavigation || link.origin !== location.origin || link.href === location.href) return;
 
@@ -92,13 +88,6 @@ document.addEventListener('click', (event) => {
   departure.finished.then(navigate, navigate);
 });
 
-window.addEventListener('popstate', () => {
-  if (lenis?.isScrolling !== 'smooth') return;
-  // Deja que el navegador restaure la posición del historial.
-  lenis.stop();
-  lenis.start();
-});
-
 window.addEventListener('pageshow', (event) => {
   if (!event.persisted || !departure) return;
   departure.cancel();
@@ -106,12 +95,6 @@ window.addEventListener('pageshow', (event) => {
 });
 
 if (!reducedMotion.matches) {
-  import('https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.mjs')
-    .then(({ default: Lenis }) => {
-      lenis = new Lenis({ autoRaf: true, stopInertiaOnNavigate: true });
-    })
-    .catch((error) => console.warn('No se pudo cargar el desplazamiento suave.', error));
-
   import('https://cdn.jsdelivr.net/npm/framer-motion@14.13.0/dom/+esm')
     .then(({ animate, inView, scroll }) => {
       if (reducedMotion.matches) return;
