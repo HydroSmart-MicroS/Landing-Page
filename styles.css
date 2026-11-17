@@ -458,8 +458,9 @@ button { font: inherit; }
 .profile:hover { background: var(--profile-hover); }
 
 .startup { background: var(--blue-solid); color: var(--solid-text); }
+.startup > .shell { container-type: inline-size; }
 .startup .overline { color: var(--acid); }
-.section .startup-name { margin: 14px 0 clamp(22px, 4vw, 60px); font-size: clamp(3.4rem, 17.1vw, 18rem); line-height: .87; letter-spacing: -.091em; text-transform: uppercase; }
+.section .startup-name { margin: 14px 0 clamp(22px, 4vw, 60px); font-size: 18.2cqi; line-height: .87; letter-spacing: -.091em; text-transform: uppercase; }
 .startup p, .startup dd { color: var(--solid-text); }
 .startup-layout > div p { max-width: 630px; font-size: clamp(1.21rem, 2.3vw, 2.5rem); line-height: 1.25; letter-spacing: -.038em; }
 .startup-purpose div { padding-block: 13px; border-top: 1px solid #f5f3e875; }
@@ -498,7 +499,6 @@ button { font: inherit; }
   .hero-title { font-size: clamp(2.4rem, 7vw, 4.25rem); }
   .hero-copy { padding-right: 15px; }
   .team { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .section .startup-name { font-size: 16.5vw; }
 }
 
 @media (max-width: 620px) {
