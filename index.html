@@ -18,8 +18,8 @@
       root.dataset.theme = root.dataset.themePreference ?? 'light';
     })();
   </script>
-  <link rel="stylesheet" href="./styles.css?v=c450b6ff08c1">
-  <script defer src="./site.js?v=3dfbdcabee58"></script>
+  <link rel="stylesheet" href="./styles.css?v=cdb6650aff8b">
+  <script defer src="./site.js?v=a78f9e739d08"></script>
   <script type="module" src="./assets/water-ripples.js?v=1cef5056e792"></script>
   <script type="module" src="./assets/section-ripples.js?v=43814e14b8a5"></script>
 </head>
@@ -185,32 +185,37 @@
         <h2 id="equipo-title" class="team-title" data-title-water><span class="title-liquid">El equipo.</span></h2>
         <p>Somos seis estudiantes de Ingeniería de Software detrás de AquaPulse.</p>
       </div>
+      <div class="team-marquee">
+        <div class="team-track">
       <div class="grid team">
-        <article class="member" data-reveal>
+        <article class="member">
           <div class="portrait"><img src="./assets/team/diego-guevara.png" alt="Retrato de Diego Guevara" width="142" height="189" loading="lazy" decoding="async"></div>
           <div><h3>Diego Ismael Guevara Serrano</h3><p>Le interesa seguir aprendiendo y colaborar en las tareas que el equipo necesita.</p></div>
         </article>
-        <article class="member" data-reveal>
+        <article class="member">
           <div class="portrait"><img src="./assets/team/keyner-hancco.png" alt="Retrato de Keyner Hancco" width="142" height="189" loading="lazy" decoding="async"></div>
           <div><h3>Keyner Iván Hancco Poma</h3><p>Le interesan la programación y el diseño de interfaces con Figma. Destaca por su organización y comunicación en equipo.</p></div>
         </article>
-        <article class="member" data-reveal>
+        <article class="member">
           <div class="portrait"><img src="./assets/team/yeira-huaman.png" alt="Retrato de Yeira Huaman" width="142" height="188" loading="lazy" decoding="async"></div>
           <div><h3>Yeira Shari Huaman Olivos</h3><p>Busca desarrollar sus habilidades de ingeniería de software y participa activamente en el desarrollo del proyecto.</p></div>
         </article>
-        <article class="member" data-reveal>
+        <article class="member">
           <div class="portrait"><img src="./assets/team/mateo-loechle.png" alt="Retrato de Mateo Loechle" width="142" height="233" loading="lazy" decoding="async"></div>
           <div><h3>Mateo Italo Loechle Arias</h3><p>Le interesan el desarrollo backend con arquitectura hexagonal y la automatización de procesos.</p></div>
         </article>
-        <article class="member" data-reveal>
+        <article class="member">
           <div class="portrait"><img src="./assets/team/victor-ortiz.png" alt="Retrato de Victor Ortiz" width="142" height="189" loading="lazy" decoding="async"></div>
           <div><h3>Victor Nicolás Ortiz Alarcón</h3><p>Le interesan la programación y el desarrollo de aplicaciones para resolver problemas con tecnología.</p></div>
         </article>
-        <article class="member" data-reveal>
+        <article class="member">
           <div class="portrait"><img src="./assets/team/andres-torres.png" alt="Retrato de Andrés Torres" width="142" height="141" loading="lazy" decoding="async"></div>
           <div><h3>Andrés Rodrigo Torres Lavandera</h3><p>Le interesan el frontend y el backend. Busca seguir aprendiendo tecnologías y herramientas de desarrollo.</p></div>
         </article>
       </div>
+        </div>
+      </div>
+      <button class="button button-blue team-pause" type="button" aria-pressed="false" hidden>Pausar equipo</button>
     </section>
 
     <section class="section section-tint" id="planes" aria-labelledby="planes-title" tabindex="-1">

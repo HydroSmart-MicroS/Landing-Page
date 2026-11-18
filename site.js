@@ -56,6 +56,28 @@ document.addEventListener('keydown', (event) => {
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+const teamTrack = document.querySelector('.team-track');
+const teamCopy = teamTrack.querySelector('.team').cloneNode(true);
+teamCopy.dataset.teamCopy = '';
+teamCopy.setAttribute('aria-hidden', 'true');
+teamCopy.inert = true;
+teamTrack.append(teamCopy);
+teamTrack.dataset.loopReady = '';
+
+const pauseTeam = document.querySelector('.team-pause');
+pauseTeam.hidden = false;
+pauseTeam.addEventListener('click', () => {
+  const paused = teamTrack.classList.toggle('is-paused');
+  pauseTeam.setAttribute('aria-pressed', String(paused));
+  pauseTeam.textContent = paused ? 'Reanudar equipo' : 'Pausar equipo';
+});
+
+const teamInView = new IntersectionObserver(([entry]) => {
+  teamTrack.classList.toggle('is-visible', entry.isIntersecting);
+});
+teamInView.observe(document.querySelector('.team-marquee'));
+
+
 const titlesInView = new IntersectionObserver((entries) => {
   for (const { target, isIntersecting } of entries) {
     target.classList.toggle('title-water-active', isIntersecting);
@@ -111,7 +133,6 @@ if (!reducedMotion.matches) {
         if (!reducedMotion.matches) enter(element);
       }, { amount: 0.18 });
 
-      const detailAnimations = [];
       const dashboard = document.querySelector('.dashboard');
       const consumption = dashboard.querySelector('[data-demo-consumption]');
       const cost = dashboard.querySelector('[data-demo-cost]');
@@ -136,15 +157,6 @@ if (!reducedMotion.matches) {
         offset: ['start 0.8', 'start 0.35']
       });
 
-      inView('.member', (member) => {
-        if (reducedMotion.matches) return;
-        const index = [...member.parentElement.children].indexOf(member);
-        detailAnimations.push(animate(member.querySelector('.portrait img'), {
-          opacity: [0.45, 1],
-          transform: ['translateY(16px) scale(1.06)', 'translateY(0) scale(1)']
-        }, { duration: 0.8, delay: (index % 3) * 0.06, ease: [0.22, 1, 0.36, 1] }));
-      }, { amount: 0.2 });
-
       const water = document.querySelector('.hero-water');
       animate(water.firstElementChild, { scale: [1.08, 1] }, { duration: 1.45, ease: 'easeOut' });
       const animation = animate(water, {
@@ -156,10 +168,9 @@ if (!reducedMotion.matches) {
         stop();
         stopDemo();
         animation.cancel();
-        detailAnimations.forEach(detail => detail.cancel());
         consumption.textContent = finalConsumption;
         cost.textContent = finalCost;
-        document.querySelectorAll('.chart-line, .chart-fill, .dashboard-alert, .portrait img').forEach(element => {
+        document.querySelectorAll('.chart-line, .chart-fill, .dashboard-alert').forEach(element => {
           element.style.removeProperty('opacity');
           element.style.removeProperty('transform');
           element.style.removeProperty('stroke-dasharray');
