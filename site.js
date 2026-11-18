@@ -60,7 +60,6 @@ const teamTrack = document.querySelector('.team-track');
 const teamCopy = teamTrack.querySelector('.team').cloneNode(true);
 teamCopy.dataset.teamCopy = '';
 teamCopy.setAttribute('aria-hidden', 'true');
-teamCopy.inert = true;
 teamTrack.append(teamCopy);
 teamTrack.dataset.loopReady = '';
 

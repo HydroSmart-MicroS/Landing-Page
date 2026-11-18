@@ -18,10 +18,11 @@
       root.dataset.theme = root.dataset.themePreference ?? 'light';
     })();
   </script>
-  <link rel="stylesheet" href="./styles.css?v=cdb6650aff8b">
-  <script defer src="./site.js?v=ecb1dd182ba2"></script>
+  <link rel="stylesheet" href="./styles.css?v=359011ad8ab7">
+  <script defer src="./site.js?v=0c43aea76b06"></script>
   <script type="module" src="./assets/water-ripples.js?v=1cef5056e792"></script>
   <script type="module" src="./assets/section-ripples.js?v=43814e14b8a5"></script>
+  <script type="module" src="./assets/reactbits.js?v=c714f52b8d3d"></script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Ir al contenido</a>
@@ -68,7 +69,7 @@
         <h1 id="hero-title" class="hero-title" data-title-water><span><b><span class="title-liquid">Gestiona</span></b></span> <span><b><span class="title-liquid">el agua de tu hogar.</span></b></span></h1>
         <div class="hero-copy" data-intro>
           <p>Monitorea tu consumo de agua, recibe alertas de posibles fugas y estima tu gasto antes del recibo.</p>
-          <a class="button button-acid" href="/app/register">Crear cuenta <span aria-hidden="true">↗</span></a>
+          <span class="rb-magnet" data-rb-magnet><a class="rb-magnet-content button button-acid" href="/app/register">Crear cuenta <span aria-hidden="true">↗</span></a></span>
           <a class="hero-scroll" href="#funciones" aria-label="Explorar las funciones"><span aria-hidden="true">↓</span></a>
         </div>
       </div>
@@ -80,17 +81,17 @@
         <p>Del primer litro al cierre del mes, ve cómo cambia el consumo de agua de tu hogar.</p>
       </div>
       <div class="features">
-        <article class="feature" id="consumo" data-reveal tabindex="-1">
+        <article class="feature rb-spotlight" data-rb-spotlight id="consumo" data-reveal tabindex="-1">
           <div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true"><path d="M4 19h16M6 15v-3m6 3V8m6 7V4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
           <h3>Consumo e historial</h3>
           <p>Revisa tus lecturas por día y medidor. Compara períodos y descarga el historial en CSV.</p>
         </article>
-        <article class="feature" id="alertas" data-reveal tabindex="-1">
+        <article class="feature rb-spotlight" data-rb-spotlight id="alertas" data-reveal tabindex="-1">
           <div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 6-2 7-2 7h16s-2-1-2-7M10 20h4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3>Alertas de consumo</h3>
           <p>Recibe avisos cuando el consumo sea inusual, haya indicios de una fuga o te acerques a tu meta mensual.</p>
         </article>
-        <article class="feature" id="costos" data-reveal tabindex="-1">
+        <article class="feature rb-spotlight" data-rb-spotlight id="costos" data-reveal tabindex="-1">
           <div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3>Costos estimados</h3>
           <p>Proyecta tu gasto en soles y consulta el desglose por agua, desagüe y tramos de consumo.</p>
@@ -153,12 +154,12 @@
         <h2 id="perfiles-title" data-title-water><span class="title-liquid">Para propietarios e inquilinos</span></h2>
       </div>
       <div class="grid two-columns">
-        <article class="card profile" data-reveal>
+        <article class="card profile rb-spotlight" data-rb-spotlight data-reveal>
           <h3>Propietarios</h3>
           <p>Organiza propiedades, unidades y medidores. Revisa el consumo por espacio, ajusta tarifas y asigna acceso a tus inquilinos.</p>
           <a class="text-link" href="/app/register?profile=propietario">Registrarme como propietario <span aria-hidden="true">↗</span></a>
         </article>
-        <article class="card profile" data-reveal>
+        <article class="card profile rb-spotlight" data-rb-spotlight data-reveal>
           <h3>Inquilinos</h3>
           <p>Consulta el consumo de agua de tu unidad durante el alquiler. Estima tu gasto y fija una meta para cuidar tu presupuesto.</p>
           <a class="text-link" href="/app/register?profile=inquilino">Registrarme como inquilino <span aria-hidden="true">↗</span></a>
@@ -189,27 +190,27 @@
         <div class="team-track">
       <div class="grid team">
         <article class="member">
-          <div class="portrait"><img src="./assets/team/diego-guevara.png" alt="Retrato de Diego Guevara" width="142" height="189" loading="lazy" decoding="async"></div>
+          <div class="portrait" data-rb-tilt><div class="rb-tilt-body"><img src="./assets/team/diego-guevara.png" alt="Retrato de Diego Guevara" width="142" height="189" loading="lazy" decoding="async"></div></div>
           <div><h3>Diego Ismael Guevara Serrano</h3><p>Le interesa seguir aprendiendo y colaborar en las tareas que el equipo necesita.</p></div>
         </article>
         <article class="member">
-          <div class="portrait"><img src="./assets/team/keyner-hancco.png" alt="Retrato de Keyner Hancco" width="142" height="189" loading="lazy" decoding="async"></div>
+          <div class="portrait" data-rb-tilt><div class="rb-tilt-body"><img src="./assets/team/keyner-hancco.png" alt="Retrato de Keyner Hancco" width="142" height="189" loading="lazy" decoding="async"></div></div>
           <div><h3>Keyner Iván Hancco Poma</h3><p>Le interesan la programación y el diseño de interfaces con Figma. Destaca por su organización y comunicación en equipo.</p></div>
         </article>
         <article class="member">
-          <div class="portrait"><img src="./assets/team/yeira-huaman.png" alt="Retrato de Yeira Huaman" width="142" height="188" loading="lazy" decoding="async"></div>
+          <div class="portrait" data-rb-tilt><div class="rb-tilt-body"><img src="./assets/team/yeira-huaman.png" alt="Retrato de Yeira Huaman" width="142" height="188" loading="lazy" decoding="async"></div></div>
           <div><h3>Yeira Shari Huaman Olivos</h3><p>Busca desarrollar sus habilidades de ingeniería de software y participa activamente en el desarrollo del proyecto.</p></div>
         </article>
         <article class="member">
-          <div class="portrait"><img src="./assets/team/mateo-loechle.png" alt="Retrato de Mateo Loechle" width="142" height="233" loading="lazy" decoding="async"></div>
+          <div class="portrait" data-rb-tilt><div class="rb-tilt-body"><img src="./assets/team/mateo-loechle.png" alt="Retrato de Mateo Loechle" width="142" height="233" loading="lazy" decoding="async"></div></div>
           <div><h3>Mateo Italo Loechle Arias</h3><p>Le interesan el desarrollo backend con arquitectura hexagonal y la automatización de procesos.</p></div>
         </article>
         <article class="member">
-          <div class="portrait"><img src="./assets/team/victor-ortiz.png" alt="Retrato de Victor Ortiz" width="142" height="189" loading="lazy" decoding="async"></div>
+          <div class="portrait" data-rb-tilt><div class="rb-tilt-body"><img src="./assets/team/victor-ortiz.png" alt="Retrato de Victor Ortiz" width="142" height="189" loading="lazy" decoding="async"></div></div>
           <div><h3>Victor Nicolás Ortiz Alarcón</h3><p>Le interesan la programación y el desarrollo de aplicaciones para resolver problemas con tecnología.</p></div>
         </article>
         <article class="member">
-          <div class="portrait"><img src="./assets/team/andres-torres.png" alt="Retrato de Andrés Torres" width="142" height="141" loading="lazy" decoding="async"></div>
+          <div class="portrait" data-rb-tilt><div class="rb-tilt-body"><img src="./assets/team/andres-torres.png" alt="Retrato de Andrés Torres" width="142" height="141" loading="lazy" decoding="async"></div></div>
           <div><h3>Andrés Rodrigo Torres Lavandera</h3><p>Le interesan el frontend y el backend. Busca seguir aprendiendo tecnologías y herramientas de desarrollo.</p></div>
         </article>
       </div>
@@ -223,11 +224,11 @@
         <div class="section-heading">
           <h2 id="planes-title" data-title-water><span class="title-liquid">Planes mensuales</span></h2>
           <p>Ambos planes tienen las mismas funciones. El consumo de agua se paga por separado.</p>
-          <a class="button button-blue" href="/app/register">Crear cuenta <span aria-hidden="true">↗</span></a>
+          <span class="rb-magnet" data-rb-magnet><a class="rb-magnet-content button button-blue" href="/app/register">Crear cuenta <span aria-hidden="true">↗</span></a></span>
         </div>
         <dl class="grid two-columns">
-          <div class="card plan"><dt>Premium</dt><dd><strong>S/ 40</strong><small>1 medidor por cuenta</small></dd></div>
-          <div class="card plan"><dt>Black</dt><dd><strong>S/ 120</strong><small>4 medidores por cuenta</small></dd></div>
+          <div class="card plan rb-spotlight" data-rb-spotlight><dt>Premium</dt><dd><strong>S/ 40</strong><small>1 medidor por cuenta</small></dd></div>
+          <div class="card plan rb-spotlight" data-rb-spotlight><dt>Black</dt><dd><strong>S/ 120</strong><small>4 medidores por cuenta</small></dd></div>
         </dl>
       </div>
     </section>
