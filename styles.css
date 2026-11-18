@@ -43,31 +43,32 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --paper: #0b1426;
-  --heading: #aebcff;
-  --blue: #aebcff;
-  --blue-solid: #222d72;
-  --blue-button: #354496;
-  --blue-button-hover: #4657ad;
-  --ink: #e3eafa;
-  --stroke: #aebcff55;
-  --header-border: var(--stroke);
-  --tint: #111d34;
-  --panel: #111d34;
-  --product: #152723;
-  --footer: #080f1e;
-  --button-hover: #202d4c;
-  --button-icon: #aebcff24;
-  --profile-hover: #17253f;
-  --feature-highlight: #ecff7719;
-  --alert: #342c17;
-  --alert-text: #ffde89;
-  --chart-line: #69dcff;
-  --chart-grid: #aebcff33;
-  --chart-label: #b4c3df;
-  --portrait-blue: #26315b;
-  --portrait-green: #2b3e31;
-  --portrait-water: #213c51;
+  --paper: #0e141a;
+  --heading: #f5f3e8;
+  --blue: #9bc9ff;
+  --blue-solid: #2635d3;
+  --blue-button: #3449db;
+  --blue-button-hover: #4059ee;
+  --ink: #d2dfe7;
+  --stroke: #60788a;
+  --header-border: #42586b;
+  --tint: #18232d;
+  --panel: #243440;
+  --card-surface: var(--panel);
+  --product: #153b42;
+  --footer: #080d12;
+  --button-hover: #2b4051;
+  --button-icon: #9bc9ff1f;
+  --profile-hover: #2a3f4d;
+  --feature-highlight: #ecff7726;
+  --alert: #3a301b;
+  --alert-text: #ffe5a0;
+  --chart-line: #73e0ff;
+  --chart-grid: #435c6e;
+  --chart-label: #b5c8d6;
+  --portrait-blue: #31495c;
+  --portrait-green: #3d4d37;
+  --portrait-water: #28535b;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -460,7 +461,7 @@ button { font: inherit; }
 .steps p, .profile p { margin-top: 10px; }
 .grid { display: grid; gap: clamp(14px, 2vw, 28px); }
 .two-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.card { padding: clamp(18px, 2.7vw, 42px); border: 1px solid var(--stroke); border-radius: 15px; }
+.card { padding: clamp(18px, 2.7vw, 42px); border: 1px solid var(--stroke); border-radius: 15px; background: var(--card-surface, transparent); }
 .text-link { display: inline-block; font-weight: 710; text-underline-offset: .2em; }
 .profile .text-link { margin-top: 17px; }
 .profile:hover { background: var(--profile-hover); }
