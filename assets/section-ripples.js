@@ -4,6 +4,14 @@ const lifetime = 400;
 const interval = 80;
 const waveCount = Math.ceil(lifetime / interval);
 const maxRadius = 156;
+const excludedCards = '[data-rb-spotlight], [data-rb-tilt], .member';
+
+// A child cannot opt out of an ancestor's SVG filter, so filter the surrounding content separately.
+function rippleTargets(element) {
+  if (element.matches(excludedCards)) return [];
+  if (!element.querySelector(excludedCards)) return [element];
+  return [...element.children].flatMap(rippleTargets);
+}
 
 function svgElement(tag, attributes = {}) {
   const element = document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -42,7 +50,7 @@ function setupRipples() {
   svg.style.position = 'absolute';
   document.body.append(svg);
   const texture = rippleTexture();
-  const targets = [...document.querySelectorAll('main > section:not(.hero), .site-footer, .header-inner > *')].map((element, index) => {
+  const targets = [...document.querySelectorAll('main > section:not(.hero), .site-footer, .header-inner > *')].flatMap(rippleTargets).map((element, index) => {
     const id = 'water-ripple-' + index;
     const filter = svgElement('filter', { id, filterUnits: 'userSpaceOnUse', x: -56, y: -56, 'color-interpolation-filters': 'sRGB' });
     filter.append(svgElement('feFlood', { 'flood-color': '#808080', result: 'still' }));
@@ -136,7 +144,7 @@ function setupRipples() {
   window.addEventListener('wheel', stop, { passive: true });
   window.addEventListener('scroll', stop, { passive: true });
 
-  return ({ clientX: x, clientY: y }) => {
+  const add = ({ clientX: x, clientY: y }) => {
     const time = performance.now();
     const last = drops.at(-1);
     if (last && (time - last.time < interval || Math.hypot(x - last.x, y - last.y) < 7)) return;
@@ -144,11 +152,16 @@ function setupRipples() {
     drops.push({ x, y, time });
     if (!frame) frame = requestAnimationFrame(draw);
   };
+  return { add, stop };
 }
 
 let ripple;
 document.addEventListener('pointermove', (event) => {
   if (event.pointerType !== 'mouse' || !pointerMotion.matches || document.documentElement.classList.contains('is-scrolling')) return;
+  if (event.target.closest(excludedCards)) {
+    ripple?.stop();
+    return;
+  }
   ripple ??= setupRipples();
-  ripple(event);
+  ripple.add(event);
 }, { passive: true });
