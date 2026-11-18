@@ -149,7 +149,7 @@ if (!reducedMotion.matches) {
         cost.textContent = (progress * 19.32).toFixed(2).replace('.', ',');
         line.style.strokeDashoffset = String(1 - progress);
         fill.style.opacity = String(progress);
-        const alertProgress = Math.max(0, (progress - 0.75) * 4);
+        const alertProgress = Math.min(1, Math.max(0, (progress - 0.5) / 0.15));
         alert.style.opacity = String(alertProgress);
         alert.style.transform = `translateY(${8 * (1 - alertProgress)}px)`;
       }, {
