@@ -18,8 +18,8 @@
       root.dataset.theme = root.dataset.themePreference ?? 'light';
     })();
   </script>
-  <link rel="stylesheet" href="./styles.css?v=e98241ae14f9">
-  <script defer src="./site.js?v=c8cea3e01ea5"></script>
+  <link rel="stylesheet" href="./styles.css?v=c450b6ff08c1">
+  <script defer src="./site.js?v=eac226a1bd10"></script>
   <script type="module" src="./assets/water-ripples.js?v=1cef5056e792"></script>
   <script type="module" src="./assets/section-ripples.js?v=43814e14b8a5"></script>
 </head>
@@ -115,15 +115,15 @@
             <span class="demo-label">Datos de ejemplo</span>
           </figcaption>
           <dl class="metrics">
-            <div><dt>Consumo registrado</dt><dd>8 400 <span>L</span></dd></div>
-            <div><dt>Costo estimado</dt><dd><span>S/</span> 19,32</dd></div>
+            <div><dt>Consumo registrado</dt><dd><span class="metric-value" data-demo-consumption>8 400</span> <span>L</span></dd></div>
+            <div><dt>Costo estimado</dt><dd><span>S/</span> <span class="metric-value" data-demo-cost>19,32</span></dd></div>
           </dl>
           <div class="chart-label"><strong>Consumo diario</strong><span>Litros</span></div>
           <svg class="chart" viewBox="0 0 440 126" role="img" aria-label="Gráfico de ejemplo del consumo diario durante un mes">
             <defs><linearGradient id="chart-water" x2="0" y2="1"><stop stop-color="#27b4dc" stop-opacity=".32"/><stop offset="1" stop-color="#27b4dc" stop-opacity=".02"/></linearGradient></defs>
             <path d="M0 20H440 M0 56H440 M0 92H440" fill="none" class="chart-grid" stroke-dasharray="4 5"/>
-            <path d="M0 84 C22 84 24 57 43 57 S70 72 90 68 S116 41 133 41 S156 60 176 57 S203 35 223 40 S245 66 264 59 S290 26 310 27 S331 43 350 40 S372 22 389 23 S422 12 440 12 V104 H0Z" fill="url(#chart-water)"/>
-            <path d="M0 84 C22 84 24 57 43 57 S70 72 90 68 S116 41 133 41 S156 60 176 57 S203 35 223 40 S245 66 264 59 S290 26 310 27 S331 43 350 40 S372 22 389 23 S422 12 440 12" fill="none" class="chart-line" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M0 84 C22 84 24 57 43 57 S70 72 90 68 S116 41 133 41 S156 60 176 57 S203 35 223 40 S245 66 264 59 S290 26 310 27 S331 43 350 40 S372 22 389 23 S422 12 440 12 V104 H0Z" class="chart-fill" fill="url(#chart-water)"/>
+            <path d="M0 84 C22 84 24 57 43 57 S70 72 90 68 S116 41 133 41 S156 60 176 57 S203 35 223 40 S245 66 264 59 S290 26 310 27 S331 43 350 40 S372 22 389 23 S422 12 440 12" fill="none" class="chart-line" pathLength="1" stroke-width="2.5" stroke-linecap="round"/>
             <g class="chart-days" font-size="11"><text x="0" y="124">Día 1</text><text x="220" y="124" text-anchor="middle">Día 15</text><text x="440" y="124" text-anchor="end">Día 30</text></g>
           </svg>
           <div class="dashboard-alert">

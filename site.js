@@ -111,6 +111,48 @@ if (!reducedMotion.matches) {
         if (!reducedMotion.matches) enter(element);
       }, { amount: 0.18 });
 
+      const detailAnimations = [];
+      const dashboard = document.querySelector('.dashboard');
+      const consumption = dashboard.querySelector('[data-demo-consumption]');
+      const cost = dashboard.querySelector('[data-demo-cost]');
+      const finalConsumption = consumption.textContent;
+      const finalCost = cost.textContent;
+
+      inView(dashboard, () => {
+        if (reducedMotion.matches) return;
+        const line = dashboard.querySelector('.chart-line');
+        line.style.strokeDasharray = '1';
+        detailAnimations.push(
+          animate(line, { strokeDashoffset: [1, 0] }, { duration: 1.25, ease: 'easeInOut' }),
+          animate(dashboard.querySelector('.chart-fill'), { opacity: [0, 1] }, { duration: 1, delay: 0.2 }),
+          animate(0, 8400, {
+            duration: 1.1,
+            ease: 'easeOut',
+            onUpdate: value => { consumption.textContent = Math.round(value).toLocaleString('en-US').replaceAll(',', ' '); },
+            onComplete: () => { consumption.textContent = finalConsumption; }
+          }),
+          animate(0, 19.32, {
+            duration: 1.1,
+            ease: 'easeOut',
+            onUpdate: value => { cost.textContent = value.toFixed(2).replace('.', ','); },
+            onComplete: () => { cost.textContent = finalCost; }
+          }),
+          animate(dashboard.querySelector('.dashboard-alert'), {
+            opacity: [0, 1],
+            transform: ['translateY(8px)', 'translateY(0)']
+          }, { duration: 0.4, delay: 1.1 })
+        );
+      }, { amount: 0.35 });
+
+      inView('.member', (member) => {
+        if (reducedMotion.matches) return;
+        const index = [...member.parentElement.children].indexOf(member);
+        detailAnimations.push(animate(member.querySelector('.portrait img'), {
+          opacity: [0.45, 1],
+          transform: ['translateY(16px) scale(1.06)', 'translateY(0) scale(1)']
+        }, { duration: 0.8, delay: (index % 3) * 0.06, ease: [0.22, 1, 0.36, 1] }));
+      }, { amount: 0.2 });
+
       const water = document.querySelector('.hero-water');
       animate(water.firstElementChild, { scale: [1.08, 1] }, { duration: 1.45, ease: 'easeOut' });
       const animation = animate(water, {
@@ -121,6 +163,15 @@ if (!reducedMotion.matches) {
         if (!matches) return;
         stop();
         animation.cancel();
+        detailAnimations.forEach(detail => detail.cancel());
+        consumption.textContent = finalConsumption;
+        cost.textContent = finalCost;
+        document.querySelectorAll('.chart-line, .chart-fill, .dashboard-alert, .portrait img').forEach(element => {
+          element.style.removeProperty('opacity');
+          element.style.removeProperty('transform');
+          element.style.removeProperty('stroke-dasharray');
+          element.style.removeProperty('stroke-dashoffset');
+        });
       }, { once: true });
     })
     .catch((error) => console.warn('No se pudieron cargar las animaciones.', error));
