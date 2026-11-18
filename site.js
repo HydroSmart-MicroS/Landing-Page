@@ -118,31 +118,23 @@ if (!reducedMotion.matches) {
       const finalConsumption = consumption.textContent;
       const finalCost = cost.textContent;
 
-      inView(dashboard, () => {
-        if (reducedMotion.matches) return;
-        const line = dashboard.querySelector('.chart-line');
-        line.style.strokeDasharray = '1';
-        detailAnimations.push(
-          animate(line, { strokeDashoffset: [1, 0] }, { duration: 1.25, ease: 'easeInOut' }),
-          animate(dashboard.querySelector('.chart-fill'), { opacity: [0, 1] }, { duration: 1, delay: 0.2 }),
-          animate(0, 8400, {
-            duration: 1.1,
-            ease: 'easeOut',
-            onUpdate: value => { consumption.textContent = Math.round(value).toLocaleString('en-US').replaceAll(',', ' '); },
-            onComplete: () => { consumption.textContent = finalConsumption; }
-          }),
-          animate(0, 19.32, {
-            duration: 1.1,
-            ease: 'easeOut',
-            onUpdate: value => { cost.textContent = value.toFixed(2).replace('.', ','); },
-            onComplete: () => { cost.textContent = finalCost; }
-          }),
-          animate(dashboard.querySelector('.dashboard-alert'), {
-            opacity: [0, 1],
-            transform: ['translateY(8px)', 'translateY(0)']
-          }, { duration: 0.4, delay: 1.1 })
-        );
-      }, { amount: 0.35 });
+      const line = dashboard.querySelector('.chart-line');
+      const fill = dashboard.querySelector('.chart-fill');
+      const alert = dashboard.querySelector('.dashboard-alert');
+      line.style.strokeDasharray = '1';
+
+      const stopDemo = scroll(progress => {
+        consumption.textContent = Math.round(progress * 8400).toLocaleString('en-US').replaceAll(',', ' ');
+        cost.textContent = (progress * 19.32).toFixed(2).replace('.', ',');
+        line.style.strokeDashoffset = String(1 - progress);
+        fill.style.opacity = String(progress);
+        const alertProgress = Math.max(0, (progress - 0.75) * 4);
+        alert.style.opacity = String(alertProgress);
+        alert.style.transform = `translateY(${8 * (1 - alertProgress)}px)`;
+      }, {
+        target: dashboard.querySelector('.chart'),
+        offset: ['start 0.8', 'start 0.35']
+      });
 
       inView('.member', (member) => {
         if (reducedMotion.matches) return;
@@ -162,6 +154,7 @@ if (!reducedMotion.matches) {
       reducedMotion.addEventListener('change', ({ matches }) => {
         if (!matches) return;
         stop();
+        stopDemo();
         animation.cancel();
         detailAnimations.forEach(detail => detail.cancel());
         consumption.textContent = finalConsumption;
